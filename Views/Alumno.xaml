@@ -1,65 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="JIProyecto.Views.Alumno"
+    x:Class="JIProyecto.Views.EmpleadoPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="JIProyecto.ViewModels"
-    Title="Alumno"
+    Title="{Binding TituloPagina}"
     >
-    <VerticalStackLayout 
-        Padding="0,10,0,0"
-        HorizontalOptions="Center"
-        WidthRequest="200">
+    <VerticalStackLayout
+    Padding="15"
+    >
+    <ActivityIndicator
+    IsVisible="{Binding LoadingEsVisible}"
+        IsRunning="{Binding LoadingEsVisible}"
+        Color="Blue"
+        HeightRequest="30"
+        />
 
-        <Label
-            Grid.Row="0"
-            Grid.Column="0"
-            Text="Nombre:" />
-        <Entry
-            Grid.Row="1"
-            Grid.Column="0"
-            Text="{Binding Nombre}" />
-        <Label Grid.Row="2" Text="Apellido:" />
-        <Entry Grid.Row="3" Text="{Binding Apellido}" />
-        <CollectionView
-            Grid.Row="4"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
-            Margin="0,10"
-            BackgroundColor="LightCoral"
-            ItemsSource="{Binding Errores}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Label
-                        Padding="5"
-                        LineBreakMode="WordWrap"
-                        MinimumWidthRequest="190"
-                        Text="{Binding .}"
-                        TextColor="White" />
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-
-        </CollectionView>
-
-        <VerticalStackLayout HorizontalOptions="Center">
-            <ImageButton
-                Command="{Binding GuardarAlumnoCommand}"
-                IsEnabled="{Binding IsEnabled}"
-                IsVisible="{Binding IsEnabled}"
-                Source="save.png" />
-
-            <ActivityIndicator
-                IsEnabled="{Binding IsBusy}"
-                IsRunning="{Binding IsBusy}"
-                IsVisible="{Binding IsBusy}" />
-
-            <Frame BackgroundColor="Green" IsVisible="{Binding IsVisible}">
-                <Label
-                    FontSize="Title"
-                    HorizontalTextAlignment="Center"
-                    Text="{Binding Resultado}"
-                    TextColor="White" />
-            </Frame>
-        </VerticalStackLayout>
+<Label Text="NombreCompleto" />
+<Entry Text="{Binding EmpleadoDTO.NombreCompleto}" Margin="0.0.0.10" />
+<Label Text="Correo" />
+<Entry Text="{Binding EmpleadoDTO.Correo}" Margin="0.0.0.10" />
+<Label Text="Sueldo" />
+<Entry Text="{Binding EmpleadoDTO.Sueldo}" Keyboard = "Numeric" Margin="0.0.0.10" />
+<Label Text="Fecha Contrato" />
+<DatePicker Date="{Binding EmpleadoDTO.FechaContrato}" Margin="0.0.0.10" />   
     </VerticalStackLayout>
 </ContentPage>
