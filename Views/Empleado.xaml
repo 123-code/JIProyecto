@@ -24,5 +24,6 @@
 <Entry Text="{Binding EmpleadoDTO.Sueldo}" Keyboard = "Numeric" Margin="0.0.0.10" />
 <Label Text="Fecha Contrato" />
 <DatePicker Date="{Binding EmpleadoDTO.FechaContrato}" Margin="0.0.0.10" />   
+<Button Text="Guardar" Command="{Binding Guardar}" BackgroundColor="Green" />
     </VerticalStackLayout>
 </ContentPage>

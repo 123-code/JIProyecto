@@ -22,7 +22,12 @@ public static class MauiProgram
 			dbContext.Database.EnsureCreated();
 			dbContext.Dispose();
 			builder.Services.AddDbContext<EmpleadoDbContext>();
-			builder.Services.AddTrasient<EmpleadoViewModel>(); 
+			builder.Services.AddTransient<EmpleadoPage>(); 
+			builder.Services.AddTransient<EmpleadoViewModel>(); 
+			builder.Services.AddTransient<MainPage>(); 
+			builder.Services.AddTransient<MainViewModel>(); 
+
+			Routing.RegisterRoute(nameof(EmpleadoPage), typeof(EmpleadoPage));
 
 		return builder.Build();
 	}
