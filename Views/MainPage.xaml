@@ -41,7 +41,7 @@ ColumnDefinitions="Auto,*">
 </Label.GestureRecognizers>
 </Label>
 
-<Label Grid.Row="4" Grid.Column="1"Padding="10,15,0,5" Text="Eliminar" TextColor="Red">
+<Label Grid.Row="4" Grid.Column="1"Padding="10,15,0,5" Text="Eliminar" TextColor="Red" HorizontalOptions="End">
 <Label.GestureRecognizers>
 <TapGestureRecognizer Command="{Binding BindingContext.EliminarCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}" CommandParameter="{Binding}"/>
 </Label.GestureRecognizers>
