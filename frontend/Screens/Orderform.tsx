@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet,Pressable } from 'react-native';
 
 export default function OrderForm() {
   const [coin, setCoin] = useState('');
@@ -12,29 +12,84 @@ export default function OrderForm() {
 
   return (
     <View style={styles.container}>
-      <Text>Place a Crypto Order</Text>
+      <View style={styles.main}>
+      <Text style={styles.txt}>Iniciar una orden</Text>
       
-      <TextInput 
-        placeholder="Coin type (eg. BTC)"
+      <TextInput  style={styles.input}
+        placeholder="Tipo de moneda (eg. BTC)"
         value={coin}
         onChangeText={setCoin}  
+
       />
 
-      <TextInput
+      <TextInput style={styles.input}
         keyboardType="numeric"
-        placeholder="Order amount"
+        placeholder="Cantidad a pedir($)"
         value={amount}
         onChangeText={setAmount}  
       />
 
-      <Button title="Place Order" onPress={placeOrder} />
+<Pressable
+  style={styles.button} 
+  onPress={placeOrder}
+>
+  <Text style={styles.buttonText} > Crear orden </Text> 
+</Pressable>
+
+      </View>
 
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 20    
+ container: {
+    flex: 1,
+    backgroundColor: 'white',
+    padding: 20,
+  },
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#39FF14',
+    borderRadius: 38,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    elevation: 3,
+    marginBottom: 10,
+    width: '100%',
+  },
+  
+  buttonText: {
+    fontSize: 16,
+  
+    color: 'black',
+    fontFamily: 'Futura',
+    letterSpacing: 1.2,
+    flex: 1,
+    textAlign: 'center',
+  },
+  input: {
+    height: 40,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 5,
+    marginBottom: 10,
+    paddingLeft: 10,
+    backgroundColor: 'white',
+  },
+  main: {
+    flex: 1,
+    backgroundColor: '#212121',
+    borderRadius: 10,
+    padding: 20,
+  },
+  txt:{
+    color: 'white',
+    fontSize: 20,
+    textAlign: 'center',
+    marginBottom: 10,
+    fontFamily: 'Futura',
   }
 });

@@ -11,8 +11,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen name="Ordenform" component={OrdenformScreen} />
         <Stack.Screen name="Home" component={MainPage} />  
-        <Stack.Screen name="Ordenform" component={OrdenformScreen} />
+       
       </Stack.Navigator> 
     </NavigationContainer>
   );
