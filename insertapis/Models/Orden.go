@@ -5,7 +5,7 @@ import(
     "github.com/google/uuid"
 )
 
-type NombreNegocio struct {
+type Order struct {
 	gorm.Model
     ID          uuid.UUID `gorm:"foreignKey:ProfileID;"`
     Nombre string `json:"nombre"`
@@ -25,7 +25,7 @@ type NombreNegocio struct {
 
 
 */
-func (p *NombreNegocio) BeforeCreate(tx *gorm.DB) error {
+func (p *Order) BeforeCreate(tx *gorm.DB) error {
 	p.ID = uuid.New()
 
 	return nil

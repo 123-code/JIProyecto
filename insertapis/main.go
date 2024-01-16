@@ -1,16 +1,11 @@
 
-
-
-
-
-
 package main
 import (
 	"net/http"
 	"github.com/gin-gonic/gin"
-   // "server/DB"
+   "jiapis/DB"
 	"github.com/gin-contrib/cors"
-    //"server/endpoints"
+    "jiapis/endpoints"
 	"os"
 )
 
@@ -20,6 +15,7 @@ func main() {
 	router.Use(cors.Default())
 
     router.GET("/",hello);
+	router.POST("/createstore",endpoints.CreateOrder);
 	/*
 	router.GET("/getalldata",endpoints.GetReservas);
 	router.POST("/createstore",endpoints.CreateNegocio);
@@ -40,5 +36,5 @@ func hello(c *gin.Context) {
 }
 
 func init(){
-	//DB.DBconnect()
+	DB.DBconnect()
 }

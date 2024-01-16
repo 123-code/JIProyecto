@@ -1,4 +1,12 @@
-func CreateProfile(c *gin.Context) {
+package endpoints
+import (
+	"net/http"
+	"github.com/gin-gonic/gin"
+	"jiapis/DB"
+	"jiapis/models"
+)
+
+func CreateOrder(c *gin.Context) {
 
 
     var reqBody struct {
@@ -20,11 +28,11 @@ func CreateProfile(c *gin.Context) {
 
     // Rest of endpoint logic...
 
-    profile := models.Profile{
+    order := models.Order{
         Nombre: nombre,
         Cantidad: cantidad,
         Email: email,
     }
 
-    DB.DBconn.Create(&profile)
+    DB.DBconn.Create(&order)
 }
