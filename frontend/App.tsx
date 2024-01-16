@@ -1,52 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native'; 
-import CoinCard from './Components/Coincard';
-import { useNavigation } from '@react-navigation/native';
-// Main Page 
+import { View, Text, StatusBar, StyleSheet } from 'react-native';
+import { Card, Title, Paragraph } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import MainPage from './Screens/MainPage';
+import OrdenformScreen from './Screens/Orderform';
+
+const Stack = createStackNavigator();
 export default function App() {
-  const navigation = useNavigation();
-  const [coinData, setCoinData] = useState<any[]>([]);
-
-  useEffect(() => {
-    const fetchCoins = async () => {
-      const res = await fetch('https://api.coinlore.net/api/tickers/');
-      const data = await res.json(); 
-      setCoinData(data.data.slice(0, 10)); 
-    };
-    fetchCoins();
-  }, []);
-
   return (
-    <View style={styles.container}>
-      {coinData.map(coin => ( 
-        <CoinCard  
-          key={coin.id}
-          name={coin.name}
-          symbol={coin.symbol}
-          price={coin.price_usd} id={''}        />
-      ))}
-      <Button onPress={() => navigation.navigate('OrderForm')} title="Order Form"/>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={MainPage} />  
+        <Stack.Screen name="Ordenform" component={OrdenformScreen} />
+      </Stack.Navigator> 
+    </NavigationContainer>
   );
 }
 
-// Card Component
-interface Coin { 
-  id: string; 
-  name: string; 
-  symbol: string;
-  price: number;
-}
-
-
-
 const styles = StyleSheet.create({
   container: {
-    padding: 10
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   card: {
-    backgroundColor: 'white',  
+    margin: 10,
     padding: 10,
-    marginBottom: 10
-  }
+  },
 });
