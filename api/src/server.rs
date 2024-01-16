@@ -1,8 +1,9 @@
-use actix_web::{web, App, HttpServer, HttpResponse, Result, error::ResponseError};
+use actix_web::{get,web, App, HttpServer, HttpResponse, Result, error::ResponseError};
 use tokio_postgres::{NoTls, Client, Error as PgError};
 use actix_web::dev::Server;
 use std::net::TcpListener;
 use std::fmt;
+use std::sync::{Arc, Mutex};
 use serde::Serialize;
 
 #[derive(Debug)]
@@ -31,8 +32,8 @@ struct MyData {
     name: String,
 }
 
-async fn handle_connection() -> Result<(), MyError> {
-    let database_url = "postgres://jmxmstkk:OnDiozn31AZq53EolR5FWsKwepL-vMgC@heffalump.db.elephantsql.com/jmxmstkk";
+async fn handle_connection() -> Result<Client, MyError> {
+    let database_url = "postgres://dcdgubry:gpmuDY2lu01owW7RBHBIh3sq1TDkbBL6@mahmud.db.elephantsql.com/dcdgubry";
     let (client, connection) = tokio_postgres::connect(database_url, NoTls).await?;
     
     tokio::spawn(async move {
@@ -43,7 +44,7 @@ async fn handle_connection() -> Result<(), MyError> {
         }
     });
 
-    Ok(())
+    Ok(client)
 }
 
 async fn get_data(db: web::Data<Client>) -> Result<HttpResponse, MyError> {
@@ -62,15 +63,19 @@ async fn get_data(db: web::Data<Client>) -> Result<HttpResponse, MyError> {
     Ok(HttpResponse::Ok().json(data))
 }
 
+
 async fn app_works() -> HttpResponse {
+
     HttpResponse::Ok().finish()
 }
 
+#[get("/users/")]
 pub async fn run(listener: TcpListener) -> Result<Server, std::io::Error> {
-    handle_connection().await;
+    let db_client = Arc::new(Mutex::new(handle_connection().await));
 
-    let server = HttpServer::new(|| {
+    let server = HttpServer::new(move|| {
         App::new()
+           .app_data(web::Data::new(db_client.clone())) 
             .route("/", web::get().to(app_works))
             .route("/data", web::get().to(get_data))
     })
