@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet,Pressable } from 'react-native';
+import axios from 'axios';
+
 
 export default function OrderForm() {
   const [coin, setCoin] = useState('');
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState(0);
+  const [email, setEmail] = useState('');
 
-  const placeOrder = () => {
-    // Logic to place order
-    console.log(`Order placed for ${amount} ${coin}`); 
+  const placeOrder = async () => {
+    try {
+      const response = await axios.post('http://localhost:8080/createstore', {
+        nombre: coin,
+        cantidad: amount,
+        email: email  
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <View style={styles.container}>
+      
       <View style={styles.main}>
       <Text style={styles.txt}>Iniciar una orden</Text>
       
@@ -22,12 +34,20 @@ export default function OrderForm() {
 
       />
 
-      <TextInput style={styles.input}
-        keyboardType="numeric"
-        placeholder="Cantidad a pedir($)"
-        value={amount}
-        onChangeText={setAmount}  
+<TextInput  
+          style={styles.input}
+          keyboardType="numeric"
+          placeholder="Cantidad a pedir($)"
+          value={amount.toString()} 
+          onChangeText={(value) => setAmount(parseInt(value))} 
+        />
+
+        <TextInput style={styles.input}
+        placeholder="Email(para notificaciones de tu orden)"
+        value={email}
+        onChangeText={setEmail}  
       />
+
 
 <Pressable
   style={styles.button} 
@@ -35,10 +55,10 @@ export default function OrderForm() {
 >
   <Text style={styles.buttonText} > Crear orden </Text> 
 </Pressable>
-
       </View>
 
     </View>
+    
   );
 }
 
@@ -46,7 +66,7 @@ const styles = StyleSheet.create({
  container: {
     flex: 1,
     backgroundColor: 'white',
-    padding: 20,
+    padding: 10,
   },
   button: {
     flexDirection: 'row',
@@ -58,7 +78,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     elevation: 3,
     marginBottom: 10,
-    width: '100%',
+    marginTop: 20,
+    width: '90%',
   },
   
   buttonText: {
@@ -71,11 +92,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   input: {
+    alignItems: 'center',
     height: 40,
+    width: '100%',
     borderColor: '#ccc',
     borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 10,
+    borderRadius: 38,
+    marginBottom: 15,
     paddingLeft: 10,
     backgroundColor: 'white',
   },
@@ -84,6 +107,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#212121',
     borderRadius: 10,
     padding: 20,
+    alignItems: 'center',
   },
   txt:{
     color: 'white',
