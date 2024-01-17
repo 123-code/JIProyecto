@@ -16,13 +16,8 @@ func main() {
 
     router.GET("/",hello);
 	router.POST("/createstore",endpoints.CreateOrder);
-	/*
-	router.GET("/getalldata",endpoints.GetReservas);
-	router.POST("/createstore",endpoints.CreateNegocio);
-	router.POST("/createprofile",endpoints.CreateProfile);
-	router.PUT("/updateprofile/:id",endpoints.UpdateProfile);
-	router.DELETE("/deleteprofile/:id",endpoints.DeleteProfile);
-	*/
+	router.GET("/getalldata",endpoints.JiGetallOrders);
+
 
 	port := os.Getenv("PORT")
 	if(port == ""){
