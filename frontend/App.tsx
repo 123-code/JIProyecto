@@ -5,15 +5,21 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MainPage from './Screens/MainPage';
 import OrdenformScreen from './Screens/Orderform';
+import Myorders from './Screens/Myorders'
+import DataScreen from './Screens/Editorder';
+
 
 const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen name="Home" component={MainPage} />  
+      <Stack.Screen name="Myorders" component={Myorders}/>
       <Stack.Screen name="Ordenform" component={OrdenformScreen} />
-        <Stack.Screen name="Home" component={MainPage} />  
-       
+     
+      <Stack.Screen name="Datascreen" component={DataScreen}/>
+
       </Stack.Navigator> 
     </NavigationContainer>
   );

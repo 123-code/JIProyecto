@@ -3,8 +3,9 @@ import { View, Text, TextInput, Button, StyleSheet,Pressable } from 'react-nativ
 import axios from 'axios';
 
 
-export default function OrderForm() {
-  const [coin, setCoin] = useState('');
+export default function OrderForm({navigation,route}:any) {
+  const {cryptodata} = route.params;
+  const [coin, setCoin] = useState(cryptodata?.name || ''); 
   const [amount, setAmount] = useState(0);
   const [email, setEmail] = useState('');
 

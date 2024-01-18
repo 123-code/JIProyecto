@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
-interface Coin { 
-    id: string; 
-    name: string; 
-    symbol: string;
-    price: number;
+interface Orden { 
+    coin: string; 
+    amount: string; 
+    email: string;
   }
-const CoinCard = ({ name, symbol, price }: Coin) => (
+const OrderCard = ({ navigation,route }: any) => (
+  
     <View style={styles.card}>
-      <Text style={styles.cardText}>{name} ({symbol})</Text> 
-      <Text>${price}</Text>
+      <Text style={styles.cardText}>{coin}</Text> 
+      <Text style={styles.cardText}>$({amount})</Text> 
+      <Text style={styles.cardText}>email:{email}</Text>
     </View>
   );
  
-
   const styles = StyleSheet.create({
     container: {
       padding: 10
     },
     card: {
       padding: 10,
-      marginBottom: 10,
+      marginBottom: 20,
       backgroundColor: '#39FF14',
-      borderRadius: 28,
+      borderRadius: 18,
     },
     cardText: {
       fontSize: 16,
@@ -33,4 +33,4 @@ const CoinCard = ({ name, symbol, price }: Coin) => (
       textAlign: 'center',
     },
   });
-  export default CoinCard;
+  export default OrderCard;

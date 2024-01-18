@@ -25,9 +25,7 @@ func CreateOrder(c *gin.Context) {
     nombre := reqBody.Nombre 
     cantidad := reqBody.Cantidad
     email := reqBody.Email
-
-    // Rest of endpoint logic...
-
+    
     order := models.Order{
         Nombre: nombre,
         Cantidad: cantidad,

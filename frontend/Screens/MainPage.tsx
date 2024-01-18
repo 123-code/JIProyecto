@@ -4,8 +4,15 @@ import { Card, Title, Paragraph } from 'react-native-paper';
 import axios from 'axios';
 import { NavigationContainer } from '@react-navigation/native';
 
-export default function HomeScreen({navigation}) {
-  const [cryptoData, setCryptoData] = useState([]);
+interface Info {
+  name: string;
+  symbol: string;
+  current_price: number; 
+}
+
+
+export default function HomeScreen({navigation}:any) {
+  const [cryptoData, setCryptoData] = useState<Info[]>([]);
 
   useEffect(() => {
     const API_KEY = ''; 
@@ -36,9 +43,7 @@ export default function HomeScreen({navigation}) {
       <Text>Lista de monedas</Text>
       {cryptoData.map((crypto, index) => (
         <Card key={index} style={styles.card}
-        onPress={() => 
-            navigation.navigate('Ordenform')  
-          }
+        onPress={()=>{navigation.navigate("Ordenform" ,{cryptodata: cryptoData})}}
         >
           <Card.Content>
             <Title>{crypto.name}</Title>
@@ -50,7 +55,7 @@ export default function HomeScreen({navigation}) {
 
       
 
-      <StatusBar style="auto" />
+      <StatusBar />
     </View>
   );
 }
