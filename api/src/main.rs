@@ -1,4 +1,44 @@
-use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder,Logger};
+use std::env;
+use actix_web::{web, App, HttpServer, Responder};
+use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION};  
+
+#[actix_web::main] 
+async fn main() -> std::io::Result<()> {
+
+    //let api_key =  "CG-pDUhHeh4gm6dA1fzPTWkwE3K";//env::var("API_KEY").expect("API Key not set");
+
+    HttpServer::new(|| {
+        App::new()
+            .route("/coins", web::get().to(get_coins))
+    })
+    .bind("127.0.0.1:8080")?
+    .run()
+    .await
+}
+
+async fn get_coins() -> impl Responder {
+
+    let mut headers = HeaderMap::new(); 
+
+    headers.insert(
+        AUTHORIZATION, 
+        HeaderValue::from_str(&format!("Bearer {}",  "CG-pDUhHeh4gm6dA1fzPTWkwE3K")).unwrap()
+    );
+
+    let client = reqwest::Client::new();
+    let resp = client
+        .get("https://api.coingecko.com/api/v3/coins/markets")  
+        .headers(headers)
+        .send()
+        .await
+        .unwrap();
+
+    let body = resp.text().await.unwrap();
+
+    web::Json(body)
+}
+
+/*use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder,Logger};
 use sqlx::{PgPool,Postgres,Pool,postgres::PgPoolOptions};
 use dotenv::dotenv;
 
@@ -51,3 +91,4 @@ App::new()
     .await;
 println!("Servisor comenzado");
 }
+*/

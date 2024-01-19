@@ -15,16 +15,13 @@ export default function HomeScreen({navigation}:any) {
   const [cryptoData, setCryptoData] = useState<Info[]>([]);
 
   useEffect(() => {
-    const API_KEY = ''; 
+
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD', {
+        const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h&x-cg-pro-api-key=CG-pDUhHeh4gm6dA1fzPTWkwE3K', {
           params: {
             vs_currency: 'usd',
             per_page: 10,  
-          },
-          headers: {
-            'Authorization': `Bearer ${API_KEY}`  
           },
         });
         setCryptoData(response.data);
@@ -40,10 +37,10 @@ export default function HomeScreen({navigation}:any) {
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
-      <Text>Lista de monedas</Text>
+      <Text style={styles.cardtext}>Lista de monedas</Text>
       {cryptoData.map((crypto, index) => (
         <Card key={index} style={styles.card}
-        onPress={()=>{navigation.navigate("Ordenform" ,{cryptodata: cryptoData})}}
+        onPress={()=>{navigation.navigate("Ordenform" ,{cryptodata: crypto})}}
         >
           <Card.Content>
             <Title>{crypto.name}</Title>
@@ -63,12 +60,32 @@ export default function HomeScreen({navigation}:any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#212121',
     alignItems: 'center',
     justifyContent: 'center',
   },
   card: {
-    margin: 10,
-    padding: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#39FF14',
+    borderRadius: 28,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    elevation: 3,
+    marginBottom: 10,
+    marginTop: 20,
+    width: '70%',
   },
+  cardtext: {
+    fontSize: 16,
+  
+    color: 'black',
+    fontFamily: 'Futura',
+    letterSpacing: 1.2,
+    flex: 1,
+    textAlign: 'center',
+  }
 });

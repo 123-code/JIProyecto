@@ -17,6 +17,8 @@ func main() {
     router.GET("/",hello);
 	router.POST("/createstore",endpoints.CreateOrder);
 	router.GET("/getalldata",endpoints.JiGetallOrders);
+	router.PUT("/updateorder/:id",endpoints.UpdateOrder);
+	router.DELETE("/deleteorder/:id",endpoints.DeleteOrder);
 
 
 	port := os.Getenv("PORT")

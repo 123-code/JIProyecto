@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet,Pressable } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 import axios from 'axios';
 
 
@@ -9,9 +10,30 @@ export default function OrderForm({navigation,route}:any) {
   const [amount, setAmount] = useState(order?.cantidad || 0);
   const [email, setEmail] = useState(order?.email || '');
 console.log("email:",email)
+
+const deleteOrder = async () => {
+  try {
+    // Make a DELETE request to the deleteorder endpoint
+    const response = await axios.delete(`http://localhost:8080/deleteorder/${order.ID}`);
+    
+    // Check the status code to determine the success of the deletion
+    if (response.status === 200) {
+      console.log("Order deleted successfully");
+      
+      // Optionally navigate back or perform any other action after deletion
+      // For example, you can use navigation.goBack() to go back to the previous screen
+      navigation.goBack();
+    } else {
+      console.log("Failed to delete order");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
   const placeOrder = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/createstore', {
+      const response = await axios.put(`http://localhost:8080/updateorder/${order.ID}`, {
         nombre: ordername,
         cantidad: amount,
         email: email  
@@ -61,6 +83,9 @@ console.log("email:",email)
 
   
 </Pressable>
+<Pressable style={styles.deleteButton} onPress={deleteOrder}>
+          <FontAwesome name="trash" size={30} color="red" />
+        </Pressable>
       </View>
 
     </View>
@@ -123,5 +148,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 10,
     fontFamily: 'Futura',
-  }
+  },
+  deleteButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+  },
 });

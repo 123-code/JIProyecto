@@ -13,7 +13,7 @@ interface Order {
   }
   
 
-export default function Myorders({navigation}:any){
+export default function Myorders({navigation,route}:any){
   const [mycryptoData, setmyCryptoData] = useState<Order[]>([]);
  
 
