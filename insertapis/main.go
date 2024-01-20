@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
    "jiapis/DB"
 	"github.com/gin-contrib/cors"
-    "jiapis/Endpoints"
+    "jiapis/endpoints"
 	"os"
 )
 
