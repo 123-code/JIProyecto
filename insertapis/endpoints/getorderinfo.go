@@ -2,7 +2,7 @@ package endpoints
 
 import (
 	"jiapis/DB"
-	"jiapis/models"
+	"jiapis/Models"
 	"github.com/gin-gonic/gin"
 )
 

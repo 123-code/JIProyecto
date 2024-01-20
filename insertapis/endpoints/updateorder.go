@@ -1,7 +1,7 @@
 package endpoints
 import(
 	"github.com/gin-gonic/gin"
-	"jiapis/models"
+	"jiapis/Models"
 	"jiapis/DB"
 	"net/http"
 )

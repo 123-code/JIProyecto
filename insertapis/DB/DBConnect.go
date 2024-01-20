@@ -5,7 +5,7 @@ import (
 	"log"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"jiapis/models"
+	"jiapis/Models"
 	//"os" 
   )
 

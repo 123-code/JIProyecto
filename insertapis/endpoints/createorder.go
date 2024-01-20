@@ -3,7 +3,7 @@ import (
 	"net/http"
 	"github.com/gin-gonic/gin"
 	"jiapis/DB"
-	"jiapis/models"
+	"jiapis/Models"
 )
 
 func CreateOrder(c *gin.Context) {
