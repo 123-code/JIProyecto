@@ -11,7 +11,14 @@ import (
 
 func main() {
 	router := gin.Default();
+/*
+	GetuserOrders := func(c*gin.Context){
+		email := c.Param("CreatorEmail")
+		orders := endpoints.GetOrdersByUser(email)
+		c.JSON(http.StatusOK, orders)
 
+	}	
+*/
 	router.Use(cors.Default())
 
     router.GET("/",hello);
@@ -20,7 +27,9 @@ func main() {
 	router.PUT("/updateorder/:id",endpoints.UpdateOrder);
 	router.DELETE("/deleteorder/:id",endpoints.DeleteOrder);
 	router.POST("/createuser",endpoints.CreateUser);
-
+	router.GET("/users/:email/orders",endpoints.GetOrdersByUser);
+	router.GET("/getorder/:id",endpoints.GetMyOrderInfo);
+	router.GET("/getuserinfo/:id",endpoints.GetUserInfo);
 
 	port := os.Getenv("PORT")
 	if(port == ""){

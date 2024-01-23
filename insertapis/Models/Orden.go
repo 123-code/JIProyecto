@@ -7,26 +7,25 @@ import(
 
 type Order struct {
 	gorm.Model
-    ID          uuid.UUID `gorm:"foreignKey:ProfileID;"`
+    ID          uuid.UUID
+    UserID uuid.UUID 
     Nombre string `json:"nombre"`
     Cantidad int `json:"cantidad"`
-    Email string `json:"Email"`
+    Contacto string `json:"contacto"`
+    CreatorEmail string `json:"CreatorEmail"`
 }
 
 /*
 
- curl --location --request POST 'http://localhost:8080/createstore' --header 'Content-Type: application/json' --data-raw '{
-    "Nombre":"My Store",
-    "Productos":"Clothing",
-    "Direccion":"123 Main St", 
-    "Web":"www.mystore.com",
-    "ProfileID": "26744267-2ab2-48d9-8552-c3f7de73e545"
-}'
-
-
+curl -X POST -H "Content-Type: application/json" -d '{
+    "Nombre": "John",
+    "Apellido": "Doe",
+    "NumCedula": "123456789",
+    "UsoCuenta": "Personal"
+}' http://localhost:8080/createuser
 */
 func (p *Order) BeforeCreate(tx *gorm.DB) error {
 	p.ID = uuid.New()
 
 	return nil
-}
+} 
