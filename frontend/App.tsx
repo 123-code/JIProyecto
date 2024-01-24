@@ -7,6 +7,8 @@ import MainPage from './Screens/MainPage';
 import OrdenformScreen from './Screens/Orderform';
 import Myorders from './Screens/Myorders'
 import DataScreen from './Screens/Editorder';
+import Success from "./Screens/Success";
+import OrderFormNew from "./Screens/OrderNew"
 
 
 const Stack = createStackNavigator();
@@ -14,14 +16,13 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+   
       <Stack.Screen name="Myorders" component={Myorders}/>
       <Stack.Screen name="Datascreen" component={DataScreen}/>
       <Stack.Screen name="Home" component={MainPage} />  
-
       <Stack.Screen name="Ordenform" component={OrdenformScreen} />
-     
- 
-
+      <Stack.Screen name="Success" component={Success} />
+      <Stack.Screen name="NewOrder" component={OrderFormNew} />
       </Stack.Navigator> 
     </NavigationContainer>
   );
