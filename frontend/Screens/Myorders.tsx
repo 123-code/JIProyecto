@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet,TouchableOpacity } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import axios from 'axios';
-
+import AppButton from '../Components/Button'
 interface Order {
   nombre: string;
   cantidad: number;
@@ -28,7 +28,9 @@ export default function Myorders({ navigation, route }: any) {
 
   return (
     <View style={styles.container}>
+      <AppButton title='Ingresar' onPress={()=>console.log("presionado")}/>
       <View style={styles.header}>
+        
         <Text style={styles.txt}>Órdenes disponibles</Text>
       </View>
       <View style={styles.cardContainer}>
