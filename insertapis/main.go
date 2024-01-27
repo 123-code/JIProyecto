@@ -12,10 +12,8 @@ import (
 func main() {
 	router := gin.Default();
 /*
-	GetuserOrders := func(c*gin.Context){
-		email := c.Param("CreatorEmail")
-		orders := endpoints.GetOrdersByUser(email)
-		c.JSON(http.StatusOK, orders)
+ curl -X GET http://localhost:8080/getorder/8dea5102-ac09-448b-afe3-84bd453a7a30
+
 
 	}	
 */
@@ -26,9 +24,10 @@ func main() {
 	router.GET("/getalldata",endpoints.JiGetallOrders);
 	router.PUT("/updateorder/:id",endpoints.UpdateOrder);
 	router.DELETE("/deleteorder/:id",endpoints.DeleteOrder);
+
 	router.POST("/createuser",endpoints.CreateUser);
-	router.GET("/users/:email/orders",endpoints.GetOrdersByUser);
-	router.GET("/getorder/:id",endpoints.GetMyOrderInfo);
+	router.GET("/users/:user_id/orders",endpoints.GetOrdersByUser);
+	router.GET("/getorder/:id",endpoints.GetUserOrders);
 	router.GET("/getuserinfo/:id",endpoints.GetUserInfo);
 
 	port := os.Getenv("PORT")

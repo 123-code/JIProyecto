@@ -4,13 +4,14 @@ import (
 	"github.com/gin-gonic/gin"
 	"jiapis/DB"
 	"jiapis/Models"
+    "github.com/google/uuid"
 )
 
 func CreateOrder(c *gin.Context) {
 
-
+    
     var reqBody struct {
-
+        UserID uuid.UUID `json:"user_id"`
         Nombre string `json:"nombre"`
         Cantidad int `json:"cantidad"`
         Contacto string `json:"contacto"`
@@ -33,7 +34,9 @@ func CreateOrder(c *gin.Context) {
     contacto := reqBody.Contacto
     creatoremail := reqBody.CreatorEmail
     
+    
     order := models.Order{
+        UserID: reqBody.UserID,
         Nombre: nombre,
         Cantidad: cantidad,
         Contacto: contacto,

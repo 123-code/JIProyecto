@@ -17,7 +17,7 @@ func CreateUser(c *gin.Context) {
 		NumCedula string `json:"Cedula"`
 		UsoCuenta string  `json:"UsoCuenta"`
     }
-
+// crear el usuario, pasar el userid a la curl request de crear orden despues 
 
     if err := c.ShouldBindJSON(&reqBody); err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

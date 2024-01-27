@@ -3,17 +3,19 @@ package endpoints
 import(
 	//"net/http"
 	"github.com/gin-gonic/gin"
-	"jiapis/DB"
+"jiapis/DB"
 	"jiapis/Models"
+	//"encoding/json"
 )
 
+func GetUserOrders(c *gin.Context) {
+	userId := c.Query("user_id")
 
-func GetMyOrderInfo(c *gin.Context) {
-	var order models.Order
-	if err := DB.DBconn.Where("id = ?", c.Param("id")).First(&order).Error; err != nil {
-		c.JSON(500, gin.H{"error": err.Error()})
-		return
-	}
-	
-	c.JSON(200, order)
+    // Get user ID from request params 
+
+    
+    var orders []models.Order
+	DB.DBconn.Where("user_id = ?", userId).Find(&orders)
+    
+	c.JSON(200, orders)
 }

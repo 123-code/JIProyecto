@@ -9,9 +9,9 @@ type Order struct {
 	gorm.Model
     ID          uuid.UUID
     UserID uuid.UUID 
-    Nombre string `json:"nombre"`
-    Cantidad int `json:"cantidad"`
-    Contacto string `json:"contacto"`
+    Nombre string `json:"Nombre"`
+    Cantidad int `json:"Cantidad"`
+    Contacto string `json:"Contacto"`
     CreatorEmail string `json:"CreatorEmail"`
 }
 
@@ -22,7 +22,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
     "Apellido": "Doe",
     "NumCedula": "123456789",
     "UsoCuenta": "Personal"
-}' http://localhost:8080/createuser
+}' http://localhost:8080/createstore
 */
 func (p *Order) BeforeCreate(tx *gorm.DB) error {
 	p.ID = uuid.New()
