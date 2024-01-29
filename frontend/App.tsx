@@ -9,7 +9,7 @@ import Myorders from './Screens/Myorders'
 import DataScreen from './Screens/Editorder';
 import Success from "./Screens/Success";
 import OrderFormNew from "./Screens/OrderNew"
-import CrearCompradorFormPage  from './Screens/CrearComprador';
+import {CrearCompradorFormPage}  from './Screens/CrearComprador';
 
 const Stack = createStackNavigator();
 export default function App() {

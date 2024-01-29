@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet,Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
 
 interface ButtonProps {
@@ -9,10 +9,10 @@ interface ButtonProps {
 
 const AppButton: React.FC<ButtonProps> = ({ title, onPress }) => {
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container}>
       <Ionicons name="person" size={16} color="gray" />
       <Text style={styles.title}>{title}</Text>
-    </View>
+    </Pressable>
   );
 };
 

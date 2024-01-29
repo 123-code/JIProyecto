@@ -1,15 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet,Pressable } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import axios from 'axios';
 
+
+interface Order {
+  ID: string;
+  Nombre: string;
+  Cantidad: number;
+  Email: string;
+}
 
 export default function OrderForm({navigation,route}:any) {
   const { order } = route.params;
   const [ordername, setordername] = useState(order?.nombre || ''); 
   const [amount, setAmount] = useState(order?.cantidad || 0);
   const [email, setEmail] = useState(order?.email || '');
+  const [orders, setOrders] = useState<Order[]>([]);
 console.log("email:",email)
+
+
+useEffect(() => {
+  const GetotherOrders = async()=>{
+    try{
+      const response = await axios.get<Order[]>(`http://localhost:8080/user_orders?user_id=${order.ID}`);
+      const data = response.data;
+      console.log(data);
+      setOrders(data);
+
+    }
+    catch(err){
+      console.error(err)  
+    
+    }
+  }
+  GetotherOrders();
+
+},[])
+
+
 
 const deleteOrder = async () => {
   try {
@@ -86,6 +115,8 @@ const deleteOrder = async () => {
 <Pressable style={styles.deleteButton} onPress={deleteOrder}>
           <FontAwesome name="trash" size={30} color="red" />
         </Pressable>
+        <Text style={styles.txt}> otras ordenes por este usuario:</Text>
+        <Text>{orders[0]?.Nombre}</Text> 
       </View>
 
     </View>

@@ -40,4 +40,5 @@ func CreateUser(c *gin.Context) {
     }
 
     DB.DBconn.Create(&user)
+	c.JSON(http.StatusCreated, gin.H{"id": user.ID})
 }

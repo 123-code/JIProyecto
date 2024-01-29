@@ -4,8 +4,8 @@ import { Card, Title, Paragraph } from 'react-native-paper';
 import axios from 'axios';
 import AppButton from '../Components/Button'
 interface Order {
-  nombre: string;
-  cantidad: number;
+  Nombre: string;
+  Cantidad: number;
   Email: string;
   CreatedAt: string;
 }
@@ -28,7 +28,14 @@ export default function Myorders({ navigation, route }: any) {
 
   return (
     <View style={styles.container}>
-      <AppButton title='Ingresar' onPress={()=>console.log("presionado")}/>
+     <TouchableOpacity
+        
+        onPress={() => {
+          navigation.navigate("CrearComprador")
+        }}
+      >
+        <Text style={styles.addButtonText}> Ingresar </Text>
+      </TouchableOpacity>
       <View style={styles.header}>
         
         <Text style={styles.txt}>Órdenes disponibles</Text>
@@ -43,8 +50,8 @@ export default function Myorders({ navigation, route }: any) {
             }}
           >
             <Card.Content>
-              <Title style={styles.titlecardText}>{order.nombre}</Title>
-              <Paragraph style={styles.cardText}>${order.cantidad}</Paragraph>
+              <Title style={styles.titlecardText}>{order.Nombre}</Title>
+              <Paragraph style={styles.cardText}>${order.Cantidad}</Paragraph>
               <Paragraph style={styles.cardText}>{order.Email}</Paragraph>
               <Paragraph style={styles.cardText}>
                 {new Date(order.CreatedAt).toLocaleDateString('en-US', {
