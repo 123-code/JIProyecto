@@ -26,8 +26,8 @@ func main() {
 	router.DELETE("/deleteorder/:id",endpoints.DeleteOrder);
 
 	router.POST("/createuser",endpoints.CreateUser);
-	router.GET("/users/:user_id/orders",endpoints.GetOrdersByUser);
-	router.GET("/getorder/:id",endpoints.GetUserOrders);
+	//router.GET("/users/:user_id/orders",endpoints.GetOrdersByUser);
+	router.GET("/user_orders",endpoints.GetUserOrders);
 	router.GET("/getuserinfo/:id",endpoints.GetUserInfo);
 
 	port := os.Getenv("PORT")

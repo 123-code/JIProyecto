@@ -1,30 +1,30 @@
 package endpoints
 
 import(
-	"net/http"
+	//"net/http"
 	"github.com/gin-gonic/gin"
+    "github.com/google/uuid"
 	"jiapis/DB"
 	"jiapis/Models"
 )
-func GetOrdersByUser(c *gin.Context) {
+func GetUserOrders(c *gin.Context) {
 
-    // Get email 
-    email := c.Param("email")
-
-    // Initialize user
-    var user models.User
-    result := DB.DBconn.Where("email = ?", email).FirstOrInit(&user)
-	if result.RowsAffected == 0 {
-		// No user found
-		c.JSON(http.StatusBadRequest, gin.H{"error": "User not found"})
-		return
-	}
-    // Get orders
-    var orders []models.Order
-    if result := DB.DBconn.Model(&user).Association("Orders").Find(&orders); result.Error != nil {
-        c.JSON(http.StatusInternalServerError, gin.H{"error": "Error retrieving orders"})
+    // Get user ID from query params
+    userId := c.Query("user_id")
+    
+    // Validate UUID format
+    if _, err := uuid.Parse(userId); err != nil {
+        c.JSON(400, gin.H{"error": "invalid user id"})
         return
     }
-
-    c.JSON(http.StatusOK, gin.H{"orders": orders})
+    
+    // Get orders
+    var orders []models.Order
+    if err := DB.DBconn.Where("user_id = ?", userId).Find(&orders).Error; err != nil {
+        c.JSON(500, gin.H{"error": "error fetching orders"})
+        return
+    }
+    
+    // Return orders
+    c.JSON(200, orders)
 }

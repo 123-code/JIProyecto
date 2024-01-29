@@ -8,7 +8,7 @@ import(
 	//"encoding/json"
 )
 
-func GetUserOrders(c *gin.Context) {
+func GetmyUserOrders(c *gin.Context) {
 	userId := c.Query("user_id")
 
     // Get user ID from request params 
