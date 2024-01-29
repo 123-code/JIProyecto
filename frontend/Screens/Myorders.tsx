@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet,TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet,TouchableOpacity,Pressable } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import axios from 'axios';
+import { FontAwesome } from '@expo/vector-icons';
 import AppButton from '../Components/Button'
+import { useFocusEffect } from '@react-navigation/native';
 interface Order {
   Nombre: string;
   Cantidad: number;
@@ -13,7 +15,7 @@ interface Order {
 export default function Myorders({ navigation, route }: any) {
   const [mycryptoData, setmyCryptoData] = useState<Order[]>([]);
 
-  useEffect(() => {
+
     const viewOrders = async () => {
       try {
         const response = await axios.get('http://localhost:8080/getalldata');
@@ -23,8 +25,14 @@ export default function Myorders({ navigation, route }: any) {
         window.alert('Error fetching data');
       }
     };
+
+
+      useFocusEffect(() => {
     viewOrders();
-  }, []);
+  });
+ 
+
+
 
   return (
     <View style={styles.container}>
@@ -36,6 +44,11 @@ export default function Myorders({ navigation, route }: any) {
       >
         <Text style={styles.addButtonText}> Ingresar </Text>
       </TouchableOpacity>
+
+      <Pressable onPress={()=>{ navigation.navigate("Home")}}>
+  <FontAwesome name="home" size={30} color="red" />
+</Pressable>
+
       <View style={styles.header}>
         
         <Text style={styles.txt}>Órdenes disponibles</Text>

@@ -13,12 +13,14 @@ export default function OrderForm({navigation,route}:any) {
   const placeOrder = async () => {
     try {
       const storedUserId = await AsyncStorage.getItem('userId');
+      console.log(storedUserId);
       const response = await axios.post('http://localhost:8080/createstore', {
         UserID: storedUserId,
         nombre: coin,
         cantidad: amount,
         email: email  
       });
+      navigation.navigate("Myorders")
       console.log(response.data);
     } catch (error) {
       console.error(error);

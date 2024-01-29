@@ -13,9 +13,9 @@ interface Order {
 
 export default function OrderForm({navigation,route}:any) {
   const { order } = route.params;
-  const [ordername, setordername] = useState(order?.nombre || ''); 
-  const [amount, setAmount] = useState(order?.cantidad || 0);
-  const [email, setEmail] = useState(order?.email || '');
+  const [ordername, setordername] = useState(order?.Nombre || ''); 
+  const [amount, setAmount] = useState(order?.Cantidad || 0);
+  const [email, setEmail] = useState(order?.Email || '');
   const [orders, setOrders] = useState<Order[]>([]);
 console.log("email:",email)
 
@@ -68,6 +68,7 @@ const deleteOrder = async () => {
         email: email  
       });
       console.log(response.data);
+      navigation.goBack();
     } catch (error) {
       console.error(error);
     }

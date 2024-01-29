@@ -51,7 +51,7 @@ export function CrearCompradorFormPage({navigation}):any{
       <TextInput  style={styles.input}
         value={cedula}
         onChangeText={setCedula}
-        placeholder="Cédula"  
+        placeholder="Cédula."  
       />
       <TextInput  style={styles.input}
         value={usocuenta} 
