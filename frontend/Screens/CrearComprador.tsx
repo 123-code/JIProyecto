@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Pressable } from 'react-native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function CrearCompradorFormPage({navigation}):any{
  
@@ -28,8 +29,8 @@ export function CrearCompradorFormPage({navigation}):any{
       
       console.log('User created!');
       console.log(userId);
-
-      navigation.navigate('Myorders', {UserId:userId});
+      await AsyncStorage.setItem('userId', userId);
+      navigation.navigate("Ordenform", {UserId:userId});
     } catch (error) {
       console.error(error);
     }

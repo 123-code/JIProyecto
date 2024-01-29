@@ -29,7 +29,7 @@ export function CompradorForm(){
       console.log('User created!');
       console.log(userId);
 
-      navigation.navigate('Myorders', {UserId:userId});
+      navigation.navigate("MisOrdenes",{UserId:userId});
     } catch (error) {
       console.error(error);
     }

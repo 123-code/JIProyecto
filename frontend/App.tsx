@@ -10,7 +10,7 @@ import DataScreen from './Screens/Editorder';
 import Success from "./Screens/Success";
 import OrderFormNew from "./Screens/OrderNew"
 import {CrearCompradorFormPage}  from './Screens/CrearComprador';
-
+import  MisOrdenes from './Screens/Misordenes';
 const Stack = createStackNavigator();
 export default function App() {
   return (
@@ -18,13 +18,12 @@ export default function App() {
       <Stack.Navigator>
       <Stack.Screen name="Myorders" component={Myorders}/>
       <Stack.Screen name="CrearComprador" component={CrearCompradorFormPage} />
-    
       <Stack.Screen name="Datascreen" component={DataScreen}/>
       <Stack.Screen name="Home" component={MainPage} />  
       <Stack.Screen name="Ordenform" component={OrdenformScreen} />
       <Stack.Screen name="Success" component={Success} />
       <Stack.Screen name="NewOrder" component={OrderFormNew} />
-
+<Stack.Screen name="MisOrdenes" component={MisOrdenes} />
       </Stack.Navigator> 
     </NavigationContainer>
   );
