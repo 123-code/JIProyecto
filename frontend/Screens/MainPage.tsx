@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StatusBar, StyleSheet } from 'react-native';
+import { View, Text, StatusBar, StyleSheet,Pressable } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import axios from 'axios';
 import { NavigationContainer } from '@react-navigation/native';
-
+import { Ionicons } from '@expo/vector-icons';
 interface Info {
   name: string;
   symbol: string;
@@ -36,7 +36,9 @@ export default function HomeScreen({navigation}:any) {
 
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <Pressable onPress={()=>{ navigation.navigate("Myorders")}}>
+    <Ionicons name="menu" size={24} color="red" />
+</Pressable>
       <Text style={styles.cardtext}>Lista de monedas</Text>
       {cryptoData.map((crypto, index) => (
         <Card key={index} style={styles.card}
