@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet,Pressable } from 'react-native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 //"Ordenform"
 
 export default function OrderFormNew({navigation,route}:any) {
@@ -11,7 +12,10 @@ export default function OrderFormNew({navigation,route}:any) {
 
   const placeOrder = async () => {
     try {
+      const storedUserId = await AsyncStorage.getItem('userId');
+      console.log(storedUserId);
       const response = await axios.post('http://localhost:8080/createstore', {
+        UserID: storedUserId,
         nombre: coin,
         cantidad: amount,
         email: email  
@@ -27,7 +31,7 @@ export default function OrderFormNew({navigation,route}:any) {
     <View style={styles.container}>
       
       <View style={styles.main}>
-      <Text style={styles.txt}>Iniciar una orden</Text>
+      <Text style={styles.txt}>Iniciar una orden.</Text>
       
       <TextInput  style={styles.input}
         placeholder="Tipo de moneda (eg. BTC)"

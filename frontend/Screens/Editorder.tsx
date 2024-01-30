@@ -116,8 +116,7 @@ const deleteOrder = async () => {
 <Pressable style={styles.deleteButton} onPress={deleteOrder}>
           <FontAwesome name="trash" size={30} color="red" />
         </Pressable>
-        <Text style={styles.txt}> otras ordenes por este usuario:</Text>
-        <Text>{orders[0]?.Nombre}</Text> 
+ 
       </View>
 
     </View>

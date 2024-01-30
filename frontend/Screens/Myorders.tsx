@@ -14,7 +14,7 @@ interface Order {
 
 export default function Myorders({ navigation, route }: any) {
   const [mycryptoData, setmyCryptoData] = useState<Order[]>([]);
-
+  //const {data} = route.params;
 
     const viewOrders = async () => {
       try {
@@ -26,6 +26,9 @@ export default function Myorders({ navigation, route }: any) {
       }
     };
 
+
+
+    //console.log(Userdata)
 
       useFocusEffect(() => {
     viewOrders();
