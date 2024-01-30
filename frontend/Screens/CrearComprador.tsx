@@ -30,6 +30,7 @@ export function CrearCompradorFormPage({navigation}):any{
       console.log('User created!');
       console.log(userId);
       await AsyncStorage.setItem('userId', userId);
+      window.alert(`Usuario${nombre} creado con éxito!`);
       navigation.navigate("Myorders", {Userdata:data});
     } catch (error) {
       console.error(error);
