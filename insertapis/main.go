@@ -24,11 +24,12 @@ func main() {
 	router.GET("/getalldata",endpoints.JiGetallOrders);
 	router.PUT("/updateorder/:id",endpoints.UpdateOrder);
 	router.DELETE("/deleteorder/:id",endpoints.DeleteOrder);
-
+ 
 	router.POST("/createuser",endpoints.CreateUser);
 	//router.GET("/users/:user_id/orders",endpoints.GetOrdersByUser);
 	router.GET("/user_orders",endpoints.GetUserOrders);
 	router.GET("/getuserinfo/:id",endpoints.GetUserInfo);
+	router.GET("/getuserbyemail",endpoints.GetUserByEmail);
 
 	port := os.Getenv("PORT")
 	if(port == ""){

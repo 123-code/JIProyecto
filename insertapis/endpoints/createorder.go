@@ -33,10 +33,15 @@ func CreateOrder(c *gin.Context) {
     cantidad := reqBody.Cantidad
     contacto := reqBody.Contacto
     creatoremail := reqBody.CreatorEmail
-    
+
+    userID, err := uuid.Parse(reqBody.UserID.String())
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user_id"})
+		return
+	}
     
     order := models.Order{
-        UserID: reqBody.UserID,
+        UserID: userID,
         Nombre: nombre,
         Cantidad: cantidad,
         Contacto: contacto,
