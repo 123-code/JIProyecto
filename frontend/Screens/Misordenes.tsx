@@ -18,7 +18,7 @@ const {userId} = route.params;
 useEffect(() => {
     const GetotherOrders = async()=>{
       try{
-        const response = await axios.get<Order[]>(`http://localhost:8080/user_orders?user_id=${userId}`);
+        const response = await axios.get<Order[]>(`https://jiproyecto-production.up.railway.app/user_orders?user_id=${userId}`);
         const data = response.data;
         console.log(data);
         setOrders(data);

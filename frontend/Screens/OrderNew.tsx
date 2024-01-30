@@ -14,7 +14,7 @@ export default function OrderFormNew({navigation,route}:any) {
     try {
       const storedUserId = await AsyncStorage.getItem('userId');
       console.log(storedUserId);
-      const response = await axios.post('http://localhost:8080/createstore', {
+      const response = await axios.post('https://jiproyecto-production.up.railway.app/createstore', {
         UserID: storedUserId,
         nombre: coin,
         cantidad: amount,

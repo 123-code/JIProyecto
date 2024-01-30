@@ -18,7 +18,7 @@ export default function Myorders({ navigation, route }: any) {
 
     const viewOrders = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/getalldata');
+        const response = await axios.get('https://jiproyecto-production.up.railway.app/getalldata');
         setmyCryptoData(response.data);
       } catch (error) {
         console.error('Error fetching data: ', error);

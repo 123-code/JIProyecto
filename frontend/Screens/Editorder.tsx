@@ -23,7 +23,7 @@ console.log("email:",email)
 useEffect(() => {
   const GetotherOrders = async()=>{
     try{
-      const response = await axios.get<Order[]>(`http://localhost:8080/user_orders?user_id=${order.ID}`);
+      const response = await axios.get<Order[]>(`https://jiproyecto-production.up.railway.app/user_orders?user_id=${order.ID}`);
       const data = response.data;
       console.log(data);
       setOrders(data);
@@ -43,7 +43,7 @@ useEffect(() => {
 const deleteOrder = async () => {
   try {
     // Make a DELETE request to the deleteorder endpoint
-    const response = await axios.delete(`http://localhost:8080/deleteorder/${order.ID}`);
+    const response = await axios.delete(`https://jiproyecto-production.up.railway.app/deleteorder/${order.ID}`);
     
     // Check the status code to determine the success of the deletion
     if (response.status === 200) {
@@ -62,7 +62,7 @@ const deleteOrder = async () => {
 
   const placeOrder = async () => {
     try {
-      const response = await axios.put(`http://localhost:8080/updateorder/${order.ID}`, {
+      const response = await axios.put(`https://jiproyecto-production.up.railway.app/updateorder/${order.ID}`, {
         nombre: ordername,
         cantidad: amount,
         email: email  

@@ -13,7 +13,7 @@ export function CrearCompradorFormPage({navigation}):any{
 
   const handleRegister = async () => {
     try {
-      const data = await axios.post('http://localhost:8080/createuser', {
+      const data = await axios.post('https://jiproyecto-production.up.railway.app/createuser', {
         Nombre: nombre,
         Apellido: apellido,
         Cedula: cedula,
